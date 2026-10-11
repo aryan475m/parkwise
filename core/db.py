@@ -7,6 +7,17 @@ Mode is chosen by env vars:
 SQL in pages uses named binds (:name) and plain SQL that runs on both.
 """
 import os, sqlite3
+from pathlib import Path
+
+# Load .env if present
+for env_path in [Path(".env"), Path(__file__).resolve().parent.parent / ".env"]:
+    if env_path.is_file():
+        with open(env_path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    k, v = line.split("=", 1)
+                    os.environ.setdefault(k.strip(), v.strip())
 
 MOCK = not os.getenv("ORA_DSN")
 _mock = None

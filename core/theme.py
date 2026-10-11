@@ -17,8 +17,16 @@ _BG = "data:image/svg+xml;utf8," + urllib.parse.quote(_TILE)
 
 _CSS = """
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Nunito:wght@400;600;800&display=swap');
-html, body, [class*="st-"], .stApp { font-family: 'Nunito', sans-serif; }
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Nunito:wght@400;600;800&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+html, body, .stApp, p, label, input, select, textarea, div.stMarkdown { font-family: 'Nunito', sans-serif; }
+/* Protect Streamlit Material Icons from font-family override without affecting text */
+[data-testid*="Icon"], [data-testid="stIconMaterial"], [class*="material-symbols"], [class*="material-icons"], [data-testid="stSidebarCollapseButton"] span, [data-testid="stExpanderToggleIcon"] {
+    font-family: 'Material Symbols Rounded', 'Material Icons' !important;
+}
+details[data-testid="stExpander"] summary p, details[data-testid="stExpander"] summary span:last-child {
+    font-family: 'Nunito', sans-serif !important;
+    letter-spacing: normal !important;
+}
 h1, h2, h3, .pw-word { font-family: 'Fredoka', sans-serif !important; letter-spacing: .3px; }
 .stApp { background-color: #cfe3d3; background-image: url("BG"); background-size: 640px 640px; }
 header[data-testid="stHeader"] { background: transparent; }

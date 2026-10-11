@@ -15,13 +15,23 @@ With no database settings it runs on built-in sample data (mock mode), so the UI
 
 ## Connect to Oracle (backend)
 
-```bash
-cp .env.example .env        # fill ORA_USER, ORA_PASSWORD, ORA_DSN
-export $(grep -v '^#' .env | xargs)    # Windows PowerShell: set each variable with $env:NAME="value"
-streamlit run app.py
-```
+1. Set up the schema, seed data, and stored procedures in your Oracle database using the provided scripts:
+   ```sql
+   -- In SQL*Plus connected as your user:
+   @sql/run_setup.sql
+   ```
+2. Copy `.env.example` to `.env` and fill in your Oracle credentials:
+   ```bash
+   cp .env.example .env        # fill ORA_USER, ORA_PASSWORD, ORA_DSN
+   ```
+   *(The application automatically detects and loads `.env` across Windows, macOS, and Linux).*
 
-When `ORA_DSN` is set, every page uses Oracle. Nothing else changes.
+3. Start the application:
+   ```bash
+   streamlit run app.py
+   ```
+
+When `ORA_DSN` is set, every page connects live to Oracle. Nothing else changes.
 
 ## What the backend must provide (all database access is in `core/db.py`)
 
