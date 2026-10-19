@@ -2,3 +2,5 @@
 __pycache__/
 *.pyc
 .venv/
+cockroach/b_bookings/data/*.csv
+
